@@ -1,6 +1,5 @@
-var test = require('tap').test;
-var through = require('through');
-var hyperstream = require('../');
+var test = require('tape');
+var hyperbuffer = require('../hyperbuffer');
 
 var fs = require('fs');
 var expected = fs.readFileSync(__dirname + '/hs/expected.html', 'utf8');
@@ -8,18 +7,13 @@ var expected = fs.readFileSync(__dirname + '/hs/expected.html', 'utf8');
 test('glue html streams from disk', function (t) {
     t.plan(1);
     
-    var hs = hyperstream({
+    var hs = hyperbuffer({
         '#a': fs.createReadStream(__dirname + '/hs/a.html'),
         '#b': fs.createReadStream(__dirname + '/hs/b.html')
+    }, function (err, data) {
+        t.equal(data, expected);
     });
     var rs = fs.createReadStream(__dirname + '/hs/index.html');
     
-    var data = '';
-    rs.pipe(hs).pipe(through(write, end));
-    
-    function write (buf) { data += buf }
-    
-    function end () {
-        t.equal(data, expected);
-    }
+    rs.pipe(hs);
 });

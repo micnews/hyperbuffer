@@ -1,5 +1,5 @@
-var test = require('tap').test;
-var hyperstream = require('../');
+var test = require('tape');
+var hyperbuffer = require('../hyperbuffer');
 var Stream = require('stream');
 
 var fs = require('fs');
@@ -8,16 +8,14 @@ var expected = fs.readFileSync(__dirname + '/az/expected.html', 'utf8');
 test('fs stream and a slow stream', function (t) {
     t.plan(1);
     
-    var hs = hyperstream({
+    var hs = hyperbuffer({
         '#a': createAzStream(),
         '#b': fs.createReadStream(__dirname + '/az/b.html')
-    });
-    var data = '';
-    hs.on('data', function (buf) { data += buf });
-    hs.on('end', function () {
+    }, function (err, data) {
+        if (err) return t.end(err);
         t.equal(data, expected);
     });
-    
+
     var rs = fs.createReadStream(__dirname + '/az/index.html');
     rs.pipe(hs);
 });

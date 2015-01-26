@@ -1,24 +1,23 @@
-var test = require('tap').test;
-var concat = require('concat-stream');
+var test = require('tape');
 var through = require('through');
-var hyperstream = require('../');
+var hyperbuffer = require('../hyperbuffer');
 
 test('string before a stream', function (t) {
     t.plan(1);
     var SIZE = 50;
     var stream = through();
     
-    var hs = hyperstream({
+    var hs = hyperbuffer({
         '.a': Array(SIZE).join('THEBEST'),
         '.b': stream
-    });
-    var rs = through();
-    rs.pipe(hs).pipe(concat(function (src) {
+    }, function (err, src) {
         t.equal(src.toString(), [
             '<div class="a">' + Array(SIZE).join('THEBEST') + '</div>',
             '<div class="b">onetwothreefourfive</div>'
         ].join(''));
-    }));;
+    });
+    var rs = through();
+    rs.pipe(hs)
     rs.queue('<div class="a"></div><div class="b"></div>');
     rs.queue(null);
     

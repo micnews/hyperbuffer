@@ -1,20 +1,19 @@
-var hyperstream = require('../');
-var test = require('tap').test;
-var concat = require('concat-stream');
+var hyperbuffer = require('../hyperbuffer');
+var test = require('tape');
 var through = require('through2');
 
 test('string _html', function (t) {
     t.plan(1);
     
-    var hs = hyperstream({
+    var hs = hyperbuffer({
         '.row': { _html: '<b>beep boop</b>' }
-    });
-    hs.pipe(concat(function (body) {
+    }, function (err, body) {
         t.equal(
             body.toString('utf8'),
             '<div class="row"><b>beep boop</b></div>'
         );
-    }));
+    });
+
     hs.end('<div class="row"></div>');
 });
 
@@ -24,14 +23,13 @@ test('stream _html', function (t) {
     stream.push('<b>beep boop</b>');
     stream.push(null);
     
-    var hs = hyperstream({
+    var hs = hyperbuffer({
         '.row': { _html: stream }
-    });
-    hs.pipe(concat(function (body) {
+    }, function (err, body) {
         t.equal(
             body.toString('utf8'),
             '<div class="row"><b>beep boop</b></div>'
         );
-    }));
+    });
     hs.end('<div class="row"></div>');
 });

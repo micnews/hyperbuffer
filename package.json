@@ -7,12 +7,19 @@
     "test": "test"
   },
   "dependencies": {
+    "collect-stream": "^1.0.0",
     "hyperfast": "^1.6.2",
-    "run-parallel-object": "^2.0.0"
+    "run-parallel-object": "^2.0.0",
+    "write-only-stream": "^1.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "ent": "^2.2.0",
+    "tape": "^3.4.0",
+    "through": "^2.3.6",
+    "through2": "^0.6.3"
+  },
   "scripts": {
-    "test": "tape tape test/*.js"
+    "test": "tape test/*.js"
   },
   "repository": {
     "type": "git",

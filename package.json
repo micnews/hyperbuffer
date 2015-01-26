@@ -1,0 +1,27 @@
+{
+  "name": "hyperbuffer",
+  "version": "0.0.0",
+  "description": "Like hyperstream but buffers the result",
+  "main": "hyperbuffer.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "hyperfast": "^1.6.2",
+    "run-parallel-object": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "tape tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/micnews/hyperbuffer"
+  },
+  "author": "David Björklund <david.bjorklund@gmail.com> (http://davidbjorklund.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micnews/hyperbuffer/issues"
+  },
+  "homepage": "https://github.com/micnews/hyperbuffer"
+}

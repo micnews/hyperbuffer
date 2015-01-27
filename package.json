@@ -1,6 +1,6 @@
 {
   "name": "hyperbuffer",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Like hyperstream but buffers the result",
   "main": "hyperbuffer.js",
   "directories": {

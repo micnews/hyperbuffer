@@ -9,6 +9,8 @@
   "dependencies": {
     "collect-stream": "^1.0.0",
     "hyperfast": "^1.6.2",
+    "is-stream": "^1.0.1",
+    "is-type": "0.0.1",
     "run-parallel-object": "^2.0.0",
     "write-only-stream": "^1.1.0"
   },
